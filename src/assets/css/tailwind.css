@@ -1,0 +1,200 @@
+:root {
+  --color-primary: #667EEA;
+  --color-secondary: #ecc94b;
+  --20: #f6fbff;
+  --30: #f4f7fa;
+  --40: #eef1f4;
+  --50: #e3e7eb;
+  --60: #bacad6;
+  --70: #b3b9bf;
+  --80: #7c858e;
+  --90: #252d37;
+  --90-half: rgba(40, 54, 61, 0.5);
+}
+
+@tailwind base;
+@tailwind components;
+
+.dim:hover,
+.dim:active {
+  opacity: 0.5;
+}
+
+.btn-icon{
+  @apply bg-white  rounded-lg;
+  opacity: 0.8;
+}
+
+
+.btn-icon:active{
+  @apply  outline-none;
+}
+
+.btn-icon:hover,
+.btn-icon:active{
+  opacity: 0.5;
+}
+
+
+.btn-icon:focus{
+  @apply  outline-none;
+}
+
+
+.dim:active {
+  opacity: 0.8;
+}
+
+.btn {
+  @apply .inline-block .no-underline .font-bold;
+}
+
+.btn-link {
+  @apply .bg-transparent .px-0 .py-0 .shadow-none;
+  text-shadow: none;
+}
+
+.btn-text-shadow {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.btn-default {
+  @apply .h-8 .px-6 .leading-tight .rounded-lg .shadow .btn-text-shadow;
+}
+
+.btn-disabled,
+.btn[disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.btn-disabled:focus {
+  outline: none;
+}
+
+.btn-default:not([disabled]):not(.btn-disabled):focus,
+.btn-default:not([disabled]):not(.btn-disabled):active {
+  outline: none;
+  box-shadow: 0 0 8px config('colors.primary');
+}
+
+.el-button{
+  text-shadow: 0 1px 2px rgba(0,0,0,.2);
+  @apply font-bold;
+}
+
+.c-form .el-form-item__label{
+  @apply font-semibold w-1/6 flex justify-center text-80;
+}
+
+.c-form  .el-form-item{
+  @apply h-20 border-b border-40 mb-0 flex items-center w-full;
+}
+
+.c-form .el-form-item .el-form-item__content{
+  @apply w-1/2;
+}
+
+@media (max-width: 640px) {
+  .c-form  .el-form-item{
+    @apply flex flex-col items-start p-4 h-auto;
+  }
+  .c-form  .el-form-item .el-form-item__label{
+    @apply w-full justify-start;
+  }
+  .c-form .el-form-item .el-form-item__content{
+    @apply w-full;
+  }
+}
+
+
+.c-form  .el-form-item:last-child{
+  @apply border-b-0;
+}
+
+.c-detail-list .list-item{
+  @apply flex border-b border-40 w-full;
+}
+
+.c-detail-list .list-item:last-child{
+  @apply border-b-0;
+}
+
+.c-detail-list .list-item .list-item__label{
+  @apply w-1/4 py-4;
+}
+
+.c-detail-list .list-item .list-item__content{
+  @apply w-3/4 py-4;
+}
+
+@media (max-width: 640px) {
+  .c-detail-list .list-item{
+    @apply flex-col items-start;
+  }
+  .c-detail-list .list-item .list-item__label{
+    @apply w-full pt-2 pb-0;
+  }
+
+  .c-detail-list .list-item .list-item__content{
+    @apply w-full py-2;
+  }
+}
+
+
+/*elementUi loading居中*/
+.el-loading-spinner{
+  @apply flex justify-center;
+}
+
+
+
+/* fade */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.28s;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
+}
+
+/* fade-transform */
+.fade-transform-leave-active,
+.fade-transform-enter-active {
+  transition: all .5s;
+}
+
+.fade-transform-enter {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.fade-transform-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+/* breadcrumb transition */
+.breadcrumb-enter-active,
+.breadcrumb-leave-active {
+  transition: all .5s;
+}
+
+.breadcrumb-enter,
+.breadcrumb-leave-active {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.breadcrumb-move {
+  transition: all .5s;
+}
+
+.breadcrumb-leave-active {
+  position: absolute;
+}
+
+
+@tailwind utilities;
