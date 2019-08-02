@@ -12,7 +12,7 @@
                 <el-form-item label="品牌说明" prop="description">
                     <el-input
                             type="textarea"
-                            autosize
+
                             placeholder="请输入内容"
                             v-model="ruleForm.description">
                     </el-input>

@@ -6,6 +6,7 @@ Vue.use(Router)
 /* Layout */
 import Layout from '@/layout/Default'
 
+import ProductRoutes from './modules/products'
 import BrandRoutes from './modules/brands'
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -68,40 +69,7 @@ export const constantRoutes = [
 ]
 
 export const asyncRoutes = [
-  {
-    path: '/products',
-    component: Layout,
-    title: '产品',
-    children: [
-      {
-        path: '',
-        component: () => import(/* webpackChunkName: "product-index" */ '@/views/products/Index'),
-        name: 'product-index',
-        meta: {title: '产品管理', icon: 'dashboard', affix: true}
-      },
-      {
-        path: 'create',
-        component: () => import(/* webpackChunkName: "product-index" */ '@/views/products/Create'),
-        name: 'product-create',
-        hidden: true,
-        meta: {title: '创建产品', icon: 'dashboard', affix: true}
-      },
-      {
-        path: ':id',
-        component: () => import(/* webpackChunkName: "product-index" */ '@/views/products/Detail'),
-        name: 'product-detail',
-        hidden: true,
-        meta: {title: '产品详情', icon: 'dashboard', affix: true}
-      },
-      {
-        path: ':id/edit',
-        component: () => import(/* webpackChunkName: "product-index" */ '@/views/products/Edit'),
-        name: 'product-edit',
-        hidden: true,
-        meta: {title: '编辑产品', icon: 'dashboard', affix: true}
-      },
-    ]
-  },
+  ProductRoutes(Layout),
   BrandRoutes(Layout)
 ]
 

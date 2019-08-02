@@ -47,10 +47,10 @@
 
             <span class="ml-auto mb-3">
                 <button class="btn-icon p-1 mr-2">
-                    <RefreshIcon  class="text-80" />
+                    <RefreshIcon class="text-80"/>
                 </button>
                 <button class="btn-icon p-1">
-                <SearchIcon  class="text-80" />
+                <SearchIcon class="text-80"/>
             </button>
             </span>
 
@@ -130,82 +130,90 @@
 </template>
 
 <script>
-  import { getProducts } from '@/api/product'
-  import resourceInfo from './resource'
+    import resourceInfo from './resource'
 
-  export default {
-    name: 'Index',
-    mixins: [resourceInfo],
-    data () {
-      return {
+    export default {
+        name: 'Index',
+        mixins: [resourceInfo],
+        data() {
+            return {
 
-        listQuery: {
-          page: 1,
-          limit: 20,
-          importance: undefined,
-          title: undefined,
-          type: undefined,
-          sort: '+id'
+                listQuery: {
+                    page: 1,
+                    limit: 20,
+                    importance: undefined,
+                    title: undefined,
+                    type: undefined,
+                    sort: '+id'
+                },
+
+                queryParams: {
+                    date: '',
+                    code: '',
+                    brand: ''
+                },
+
+                listLoading: false,
+                list: null,
+                total: 0,
+                importanceOptions: [1, 2, 3],
+                tableKey: 0
+            }
         },
 
-        queryParams: {
-          date: '',
-          code: '',
-          brand: ''
+        methods: {
+            getList() {
+
+                const filters = {
+                    brand: [{value: 1, symbol: '='}],
+                    arrived_at: [{value: "2019-07-20", symbol: '>'}, {value: "2019-07-22", symbol: '<'}]
+                }
+
+                let filterStr = btoa(JSON.stringify(filters))
+
+                this.listLoading = true
+                this.listQuery.filters = filterStr
+                this.getResources(this.listQuery).then(({data}) => {
+                    this.list = data.data
+                    this.total = data.total
+                    this.listLoading = false
+                })
+            },
+
+            handleFilter() {
+                this.listQuery.page = 1
+                this.getList()
+            },
+
+            sortChange(data) {
+                const {prop, order} = data
+                if (prop === 'id') {
+                    this.sortByID(order)
+                }
+            },
+
+            sortByID(order) {
+                if (order === 'ascending') {
+                    this.listQuery.sort = '+id'
+                } else {
+                    this.listQuery.sort = '-id'
+                }
+                this.handleFilter()
+            },
+
+            handleSizeChange(val) {
+                console.log(`每页 ${val} 条`)
+            },
+            handleCurrentChange(val) {
+                console.log(`当前页: ${val}`)
+            },
+
         },
 
-        listLoading: false,
-        list: null,
-        total: 0,
-        importanceOptions: [1, 2, 3],
-        tableKey: 0
-      }
-    },
-
-    methods: {
-      getList () {
-        this.listLoading = true
-        getProducts(this.listQuery).then(({data}) => {
-          this.list = data.data
-          this.total = data.total
-          this.listLoading = false
-        })
-      },
-
-      handleFilter () {
-        this.listQuery.page = 1
-        this.getList()
-      },
-
-      sortChange (data) {
-        const {prop, order} = data
-        if (prop === 'id') {
-          this.sortByID(order)
+        created() {
+            this.getList()
         }
-      },
-
-      sortByID (order) {
-        if (order === 'ascending') {
-          this.listQuery.sort = '+id'
-        } else {
-          this.listQuery.sort = '-id'
-        }
-        this.handleFilter()
-      },
-
-      handleSizeChange (val) {
-        console.log(`每页 ${val} 条`)
-      },
-      handleCurrentChange (val) {
-        console.log(`当前页: ${val}`)
-      },
-
-    },
-
-    created () {
-      this.getList()
     }
-  }
 </script>
 
 <style scoped>

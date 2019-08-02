@@ -83,12 +83,17 @@
   @apply font-bold;
 }
 
+.c-form {
+  @apply flex flex-col;
+}
 .c-form .el-form-item__label{
   @apply font-semibold w-1/6 flex justify-center text-80;
 }
 
+
+
 .c-form  .el-form-item{
-  @apply h-20 border-b border-40 mb-0 flex items-center w-full;
+  @apply my-3 flex h-auto w-full;
 }
 
 .c-form .el-form-item .el-form-item__content{

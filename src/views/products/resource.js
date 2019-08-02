@@ -1,16 +1,19 @@
+import { getResources, getResource, createResource, updateResource, deleteResource } from '@/api/product'
+import { resourceInfo } from '@/router/modules/products'
+
 export default {
   data () {
     return {
-      resourceLabel: '产品',
-      resourceName: 'product',
+      resourceLabel: resourceInfo.resourceLabel,
+      resourceName: resourceInfo.resourceName,
       // createResourceRouteName: 'product-create',
       // viewResourceRouteName: 'product-detail',
       // editResourceRouteName: 'product-edit`'
     }
   },
 
-  methods:{
-    deleteResourceHandler(id){
+  methods: {
+    deleteResourceHandler (id) {
       alert(id)
       this.$confirm('此操作将永久删除该资源, 是否继续?', '提示', {
         confirmButtonText: '确定',
@@ -20,11 +23,16 @@ export default {
         this.$message({
           type: 'success',
           message: '删除成功!'
-        });
+        })
       }).catch(() => {
 
-      });
-    }
+      })
+    },
+    getResources,
+    getResource,
+    createResource,
+    updateResource,
+    deleteResource
   },
 
   computed: {

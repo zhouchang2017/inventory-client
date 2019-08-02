@@ -11,38 +11,16 @@
 
         <div class="overflow-hidden rounded-lg flex flex-wrap justify-start items-center mb-5">
             <!--filter form-->
-            <div class="flex items-center mr-3 mb-3">
-                <label class="text-gray-500 text-sm font-bold block mr-3 flex-shrink-0">
-                    上市时间
-                </label>
-                <el-date-picker
-                        id="date"
-                        size="small"
-                        v-model="queryParams.date"
-                        type="daterange"
-                        start-placeholder="开始日期"
-                        end-placeholder="结束日期"
-                        :default-time="['00:00:00', '23:59:59']">
-                </el-date-picker>
-            </div>
 
             <div class="flex items-center mr-3 mb-3">
                 <label class="text-gray-500 text-sm font-bold mr-3 flex-shrink-0">
-                    编码
+                    名称
                 </label>
-                <el-input size="small" v-model="queryParams.code" placeholder="请输入搜索产品编码">
+                <el-input size="small" v-model="queryParams.name" placeholder="请输入搜索品牌名称">
 
                 </el-input>
             </div>
 
-            <div class="flex items-center mr-3 mb-3">
-                <label class="text-gray-500 text-sm font-bold mr-3 flex-shrink-0">
-                    品牌
-                </label>
-                <el-input size="small" v-model="queryParams.brand" placeholder="请输入搜索产品品牌">
-
-                </el-input>
-            </div>
 
 
             <span class="ml-auto mb-3">
@@ -73,21 +51,23 @@
                     </template>
                 </el-table-column>
 
-                <el-table-column label="上市时间" align="center">
+                <el-table-column label="名称" align="center">
                     <template slot-scope="scope">
-                        <span>{{ scope.row.arrived_at }}</span>
+                        <span>{{ scope.row.name }}</span>
                     </template>
                 </el-table-column>
 
-                <el-table-column label="编码" align="center">
+                <el-table-column label="LOGO" align="center">
                     <template slot-scope="scope">
-                        <span>{{ scope.row.code }}</span>
+                        <div class="flex justify-center">
+                            <img class="object-cover w-24 h-full rounded-lg overflow-hidden" :src="scope.row.avatar">
+                        </div>
                     </template>
                 </el-table-column>
 
-                <el-table-column label="价格" align="center">
+                <el-table-column label="创建时间" align="center">
                     <template slot-scope="scope">
-                        <span>{{ scope.row.price }}</span>
+                        <span>{{ scope.row.created_at }}</span>
                     </template>
                 </el-table-column>
 
@@ -130,7 +110,6 @@
 </template>
 
 <script>
-  import { getProducts } from '@/api/product'
   import resourceInfo from './resource'
 
   export default {
@@ -149,9 +128,7 @@
         },
 
         queryParams: {
-          date: '',
-          code: '',
-          brand: ''
+          name: '',
         },
 
         listLoading: false,
